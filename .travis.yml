@@ -1,0 +1,49 @@
+sudo: required
+language: node_js
+node_js:
+    - node
+cache:
+  directories:
+    - node_modules
+before_install:
+    - npm config set spin false
+    - npm install -g mocha
+before_script: 
+    - chmod 0777 ./mean-application/node_modules/.bin/mocha
+services:
+    - mongodb
+script:
+    - cd ./mean-application/test
+    - mocha test
+after_success:
+    - mkdir codedeploy
+    - zip -r mean_application_zip_file.zip mean-application appspec.yml startServer.sh
+    - ls -al
+    - mv mean_application_zip_file.zip codedeploy/
+    - ls -al
+    - pwd
+    - cd codedeploy
+    - ls -al
+    - pwd
+before_deploy:
+- cd ..
+deploy:
+  - provider: s3
+    access_key_id: AKIAI67A5NEERJKMQHPQ
+    secret_access_key:
+       secure: i4c4WvgSgL5bKFb1GTf5/MZFOueNogqiukRpAetDvd5UK0sUb3rCHSrZBRgnOfkIGcUsL4aFqa80d0DwLgQI5jkNojUZYJETLy/O2lXjx/ArUMxTwM1VmvLPfa33EZDygzmfi6henVMbR6n0wKa3jRzLgn8AsN2oINTeI0gvOmbVJ1cyaTbkKD//T+LdYG6L6dMl51MxSGY26PdV+S/OmNyAuc0BeA6DAp/Fu4Ebi8wV6MVYa3eEkA6bIkQ0j+eRzEIn6uM5jLWvmSSRJudY8fI0mEA/spDpQ8xHcpBfGQx+R2ZkMPgGzNOOXkAmfEn4Evz6KD4/XoArJRM8CBxiwFWjOk8R5IOVTb+Jqwc/XfTjzUQSNTFKp9UAJ1cn0U71WtR1gu5+qXB82JO82lnyXBPbnqndQirQZ3htWgYEwz46X87yhhjGAq228jliEvJ19PHzFyagax5mWXaN2bQ8xrMsyf47LRJwatTnnzjkLspUHYiygKUy5IdOHZN2DVjTty4d9undhTDCjjnxO3QYK/Reapn9llYkGSHrnTp3AoL8OGX00wC1hh8hki8kypHnqhk1/wOCSmT7PkgnCAhh8cllV6laVFJJyMXVxV1CiDTazKOcrDg5mzd8HJfTiQU4f+S13Tl6hM0F1XgH2viCG12S/JqBlOc7uvLHp7W5c/A=
+    local_dir: codedeploy
+    bucket: s3.neu-csye6225-spring2017-team-9.info
+    region: us-east-1
+    skip_cleanup: true
+  - provider: codedeploy
+    access_key_id: AKIAI67A5NEERJKMQHPQ
+    secret_access_key:
+       secure: i4c4WvgSgL5bKFb1GTf5/MZFOueNogqiukRpAetDvd5UK0sUb3rCHSrZBRgnOfkIGcUsL4aFqa80d0DwLgQI5jkNojUZYJETLy/O2lXjx/ArUMxTwM1VmvLPfa33EZDygzmfi6henVMbR6n0wKa3jRzLgn8AsN2oINTeI0gvOmbVJ1cyaTbkKD//T+LdYG6L6dMl51MxSGY26PdV+S/OmNyAuc0BeA6DAp/Fu4Ebi8wV6MVYa3eEkA6bIkQ0j+eRzEIn6uM5jLWvmSSRJudY8fI0mEA/spDpQ8xHcpBfGQx+R2ZkMPgGzNOOXkAmfEn4Evz6KD4/XoArJRM8CBxiwFWjOk8R5IOVTb+Jqwc/XfTjzUQSNTFKp9UAJ1cn0U71WtR1gu5+qXB82JO82lnyXBPbnqndQirQZ3htWgYEwz46X87yhhjGAq228jliEvJ19PHzFyagax5mWXaN2bQ8xrMsyf47LRJwatTnnzjkLspUHYiygKUy5IdOHZN2DVjTty4d9undhTDCjjnxO3QYK/Reapn9llYkGSHrnTp3AoL8OGX00wC1hh8hki8kypHnqhk1/wOCSmT7PkgnCAhh8cllV6laVFJJyMXVxV1CiDTazKOcrDg5mzd8HJfTiQU4f+S13Tl6hM0F1XgH2viCG12S/JqBlOc7uvLHp7W5c/A=
+    bucket: s3.neu-csye6225-spring2017-team-9.info
+    key: mean_application_zip_file.zip
+    bundle_type: zip
+    application: Blogfolio
+    deployment_group: blog10
+    region: us-east-1
+    wait-until-deployed: true

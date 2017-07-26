@@ -1,0 +1,8 @@
+{
+  "globalDependencies": {
+    "assert": "registry:dt/assert#0.0.0+20161116022913",
+    "chai": "registry:dt/chai#3.4.0+20170217154556",
+    "mongoose": "registry:dt/mongoose#4.7.0+20170322192047",
+    "node": "registry:dt/node#7.0.0+20170322231424"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "codedeploy:RegisterApplicationRevision",
+        "codedeploy:GetApplicationRevision"
+      ],
+      "Resource": [
+        "arn:aws:codedeploy:us-east-1:638274294879:application:Blogfolio"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "codedeploy:CreateDeployment",
+        "codedeploy:GetDeployment"
+      ],
+      "Resource": [
+        "arn:aws:s3:::s3.neu-csye6225-spring2017-team-9.info"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "codedeploy:GetDeploymentConfig"
+      ],
+      "Resource": [
+        "arn:aws:codedeploy:us-east-1:638274294879:deploymentconfig:CodeDeployDefault.OneAtATime",
+        "arn:aws:codedeploy:us-east-1:638274294879:deploymentconfig:CodeDeployDefault.HalfAtATime",
+        "arn:aws:codedeploy:us-east-1:638274294879:deploymentconfig:CodeDeployDefault.AllAtOnce"
+      ]
+    }
+  ]
+}

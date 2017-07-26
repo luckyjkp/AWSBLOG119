@@ -1,0 +1,27 @@
+{
+  "name": "mean-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Paladi",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "aws-sdk": "^2.36.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.1",
+    "chai": "^3.5.0",
+    "debug.log": "0.0.3",
+    "express": "^4.15.2",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "jsonwebtoken": "^7.3.0",
+    "mocha": "^3.2.0",
+    "mongoose": "^4.9.2",
+    "morgan": "^1.8.1"
+  }
+}

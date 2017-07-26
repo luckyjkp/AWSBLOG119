@@ -1,0 +1,24 @@
+version: 0.0
+os: linux
+files:
+  # - source: ./appspec.yml
+    # destination: /home/ubuntu
+    # overwrite: yes
+  - source: ./startServer.sh
+    destination: /home/ubuntu
+    overwrite: yes
+  - source: ./mean-application
+    destination: /home/ubuntu
+    overwrite: yes
+  # - source: ./cleanup.sh
+    # destination: /home/ubuntu
+    # overwrite: yes
+hooks:
+ AfterInstall:
+  - location: ./startServer.sh
+    timeout: 180
+    runas: ubuntu
+  # ValidateService:
+   # - location: ./mean-application/public/app/services
+     # timeout: 120s
+     # runas: ubuntu

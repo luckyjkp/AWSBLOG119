@@ -1,0 +1,18 @@
+{
+  "Comment": "Update record to reflect new IP address of home router",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "ec2.neu-csye6225-spring2017-team-9.info.",
+        "Type": "A",
+        "TTL": 300,
+        "ResourceRecords": [
+          {
+            "Value": "54.242.211.187"
+          }
+        ]
+      }
+    }
+  ]
+}
